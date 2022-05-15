@@ -15,15 +15,22 @@ const App = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const addPending = (pending) => {
-    let newPending = { ...pending, id };
-    setPendings((pendings) => [...pendings, newPending]);
+    const isDuplicated =
+      pendings.filter((pend) => pend.text === pending.text).length > 0;
 
-    if (pending.status === 'Active') {
-      setCards((cards) => [...cards, newPending]);
+    if (isDuplicated) {
+      alert('Duplicated description, please enter a new text');
+    } else {
+      let newPending = { ...pending, id };
+      setPendings((pendings) => [...pendings, newPending]);
+
+      if (pending.status === 'Active') {
+        setCards((cards) => [...cards, newPending]);
+      }
+
+      setId((currentId) => currentId + 1);
+      setIsFormVisible(false);
     }
-
-    setId((currentId) => currentId + 1);
-    setIsFormVisible(false);
   };
 
   const removePending = (id) => {
