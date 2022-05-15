@@ -28,6 +28,8 @@ You can run the project in the development mode by running `npm start` and the p
 - A custom styled button that is used in other components
 - The pending cards are draggable
 - The application does not allow duplicated descriptions
+- The due date of the pendings is included
+- The almost expired pendings has another color
 
 ## Available Scripts
 
