@@ -11,6 +11,7 @@ const Form = ({ onSubmit }) => {
   const [priority, setPriority] = useState('Medium');
   const [text, setText] = useState('');
   const [status, setStatus] = useState('Active');
+  const [dueDate, setDueDate] = useState('');
 
   const handleInputChange = (e) => {
     const {
@@ -27,6 +28,9 @@ const Form = ({ onSubmit }) => {
       case 'status':
         setStatus(value);
         break;
+      case 'dueDate':
+        setDueDate(value);
+        break;
       default:
         break;
     }
@@ -36,7 +40,7 @@ const Form = ({ onSubmit }) => {
     e.preventDefault();
 
     if (onSubmit) {
-      onSubmit({ priority, text, status });
+      onSubmit({ priority, text, status, dueDate });
       clearInputs();
     }
   };
@@ -45,6 +49,7 @@ const Form = ({ onSubmit }) => {
     setPriority('Medium');
     setText('');
     setStatus('Active');
+    setDueDate('');
   };
 
   return (
@@ -83,6 +88,18 @@ const Form = ({ onSubmit }) => {
           <option value='Active'>Active</option>
           <option value='Done'>Done</option>
         </SelectStyled>
+      </LabelStyled>
+
+      <br />
+
+      <LabelStyled>
+        Due date:
+        <input
+          type='datetime-local'
+          value={dueDate}
+          name='dueDate'
+          onChange={handleInputChange}
+        />
       </LabelStyled>
 
       <br />

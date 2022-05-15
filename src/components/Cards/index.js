@@ -6,7 +6,7 @@ import Button from '../Button';
 import {
   CardContainer,
   TextContainer,
-  PriorityContainer,
+  MetadataContainer,
   ButtonsContainer,
 } from './styled';
 
@@ -18,10 +18,12 @@ export const Card = ({
   index,
   priority,
   text,
+  dueDate,
   onRemove,
   onComplete,
   moveCard,
   children,
+  isAlmostExpired,
 }) => {
   const ref = useRef(null);
 
@@ -61,11 +63,14 @@ export const Card = ({
   drag(drop(ref));
 
   return (
-    <CardContainer ref={ref}>
+    <CardContainer ref={ref} isAlmostExpired={isAlmostExpired}>
       {type === 'data' && (
         <>
           <TextContainer>{text}</TextContainer>
-          <PriorityContainer>{priority} priority</PriorityContainer>
+          <MetadataContainer>{priority} priority</MetadataContainer>
+          {dueDate && (
+            <MetadataContainer>Due date: {dueDate}</MetadataContainer>
+          )}
 
           <ButtonsContainer>
             <Button variant='warn' onClick={handleRemove}>
@@ -83,7 +88,20 @@ export const Card = ({
 };
 
 const Cards = ({ cards, moveCard, removePending, completePending }) => {
+  const today = new Date();
+  const start = new Date(today);
+  const end = new Date(today);
+  start.setHours(0, 0, 0);
+  end.setDate(today.getDate() + 1);
+  end.setHours(23, 59, 59);
+
   const renderCard = (card, index) => {
+    const dueDate = new Date(card.dueDate);
+
+    const isAlmostExpired =
+      dueDate.getTime() >= start.getTime() &&
+      dueDate.getTime() <= end.getTime();
+
     return card ? (
       <Card
         key={card.id}
@@ -95,6 +113,7 @@ const Cards = ({ cards, moveCard, removePending, completePending }) => {
         onRemove={removePending}
         onComplete={completePending}
         moveCard={moveCard}
+        isAlmostExpired={isAlmostExpired}
       />
     ) : null;
   };

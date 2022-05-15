@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 const CardContainer = styled.div`
-  background-color: #ffffff;
+  background-color: ${({ isAlmostExpired }) =>
+    isAlmostExpired ? '#FFD6D6' : '#FAFAFA'};
   border: 1px solid;
   box-shadow: 5px 5px 15px rgba(60, 60, 60, 0.75);
   display: flex;
   flex-flow: column wrap;
-  height: 150px;
+  height: 200px;
   margin: 20px;
   padding: 15px;
   position: relative;
-  width: 150px;
+  width: 200px;
 `;
 
 const TextContainer = styled.div`
@@ -19,7 +20,7 @@ const TextContainer = styled.div`
   overflow-y: auto;
 `;
 
-const PriorityContainer = styled.div`
+const MetadataContainer = styled.div`
   color: grey;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
@@ -37,4 +38,4 @@ const ButtonsContainer = styled.div`
   width: 80%;
 `;
 
-export { CardContainer, TextContainer, PriorityContainer, ButtonsContainer };
+export { CardContainer, TextContainer, MetadataContainer, ButtonsContainer };
