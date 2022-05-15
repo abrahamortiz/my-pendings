@@ -27,6 +27,7 @@ You can run the project in the development mode by running `npm start` and the p
 - The counter also displays the number of active and done pendings
 - A custom styled button that is used in other components
 - The pending cards are draggable
+- The application does not allow duplicated descriptions
 
 ## Available Scripts
 
