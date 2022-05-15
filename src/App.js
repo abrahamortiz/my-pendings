@@ -22,10 +22,10 @@ const App = () => {
       alert('Duplicated description, please enter a new text');
     } else {
       let newPending = { ...pending, id };
-      setPendings((pendings) => [...pendings, newPending]);
+      setPendings((pendings) => [newPending, ...pendings]);
 
       if (pending.status === 'Active') {
-        setCards((cards) => [...cards, newPending]);
+        setCards((cards) => [newPending, ...cards]);
       }
 
       setId((currentId) => currentId + 1);
